@@ -5,7 +5,9 @@
 
 #define MAXLINES 100
 
-std::string *readf(std::string filename);
+std::string *readf(std::string);
+void writef(std::string, std::string*);
+
 
 int main(int argc, char *argv[])
 {
@@ -17,9 +19,19 @@ int main(int argc, char *argv[])
 
 	std::string filename = argv[1];
 
+	//Writing to file
+	std::string* fileinfo;
+	fileinfo = new std::string;
+
+	*fileinfo = argv[2];
+
+	writef(filename,fileinfo);
+	delete fileinfo;
+
+	//Reading File
 	std::string *file_lines = readf(filename);
 
-	for(int i = 0; i < sizeof(file_lines); i++)
+	for(size_t i = 0; i < sizeof(file_lines); i++)
 	{
 		if(!(file_lines[i] == "")){
 			std::cout << file_lines[i] << std::endl;
@@ -29,10 +41,33 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+void writef(std::string filename, std::string *fileinfo)
+{
+	std::ofstream FileWriter;
+
+	FileWriter.open(filename);
+
+	if(!FileWriter.is_open())
+	{
+		perror("Could not open file");
+	}
+
+	FileWriter << *fileinfo;
+	
+
+	FileWriter.close();
+}
+
+
 std::string *readf(std::string filename) 
 {
 	std::ifstream FileReader (filename);
 	std::string file_line_reader;
+
+	if(!FileReader.is_open())
+	{
+		perror("Could not open file");
+	}
 
 	std::string *file_descr = new std::string[MAXLINES];
 	int i = 0;
