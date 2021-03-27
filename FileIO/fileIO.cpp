@@ -7,7 +7,9 @@
 
 std::string *readf(std::string);
 void writef(std::string, std::string*);
-
+void imagecopy(std::string, std::string);
+void writebinf(std::string, std::string);
+std::string readbinf(std::string);
 
 int main(int argc, char *argv[])
 {
@@ -26,7 +28,6 @@ int main(int argc, char *argv[])
 	*fileinfo = argv[2];
 
 	writef(filename,fileinfo);
-	delete fileinfo;
 
 	//Reading File
 	std::string *file_lines = readf(filename);
@@ -38,6 +39,16 @@ int main(int argc, char *argv[])
 		}
 	} 
 
+	// Copying a image
+	imagecopy("image.jpg","copyimage.jpg");
+
+	// Writing binary file
+	writebinf(filename,"Hello World, Luspew");
+	
+	// Reading binary file
+	readbinf(filename);
+
+	delete fileinfo;
 	return 0;
 }
 
@@ -81,4 +92,27 @@ std::string *readf(std::string filename)
 	
 	FileReader.close();
 	return file_descr;
+}
+
+void imagecopy(std::string filename, std::string copyimage)
+{
+	std::ofstream(copyimage, std::ios::binary) << std::ifstream(filename, std::ios::binary).rdbuf();
+}
+
+void writebinf(std::string filename, std::string fileinfo)
+{
+	std::ofstream OutFile;
+	OutFile.open(filename, std::ios::out | std::ios::binary);
+	OutFile.write(fileinfo.c_str(), fileinfo.length());
+	OutFile.close();
+}
+
+std::string readbinf(std::string filename)
+{
+	std::ifstream File(filename);
+	std::string lines;
+
+	getline(File, lines);
+
+	return lines;
 }
