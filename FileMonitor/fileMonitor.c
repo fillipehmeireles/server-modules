@@ -46,10 +46,6 @@ typedef struct
 
 void logger(LOGGER_MSG log);
 
-void test(char *c, char *r)
-{
-    printf("%s", c);
-}
 int main(int argc, char *argv[])
 {
     LOGGER_MSG log;
