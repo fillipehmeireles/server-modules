@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "inotify.h": "c",
-        "typeinfo": "c"
-    }
-}
