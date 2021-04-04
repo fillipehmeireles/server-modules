@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 
         if (buff_read < 0)
         {
-            perror("read");
+            perror("[X] Error on read to buffer: ");
             break;
         }
 
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
                 if (event->mask & IN_ISDIR)
                 {
 
-                    printf("Directory %s was created\n", event->name);
+                    printf("[*]Directory %s was created\n", event->name);
                 }
                 else
                 {
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
             {
                 if (event->mask & IN_ISDIR)
                 {
-                    printf("Directory %s was deleted\n", event->name);
+                    printf("[*]Directory %s was deleted\n", event->name);
                 }
                 else
                 {
