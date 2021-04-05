@@ -1,3 +1,14 @@
+/***
+    File IO
+
+        - fileIO.cpp
+
+    Author: Fillipe Meireles
+    Organization: Luspew
+
+    https://github.com/fillipehmeireles/server-modules
+
+***/
 #include <iostream>
 #include <string>
 #include <fstream>
